@@ -2,9 +2,9 @@
 
 ## Problem Statement
 
-The global proliferation of single-use plastic bags continues to be a major environmental concern, contributing to landfill overflow, marine pollution, and greenhouse gas emissions. Despite various recycling initiatives, most systems lack transparency, traceability, and meaningful incentives for both consumers and stakeholders. As highlighted by Walmart Canada's 2024 sustainability challenge, there is a critical need for an innovative, tech-driven solution that not only eliminates single-use plastics but also actively engages users and partners in a circular economy.
+The unchecked use of single-use plastic bags remains a critical environmental challenge, leading to overflowing landfills, marine pollution, and increased greenhouse gas emissions. As highlighted by Walmart Canada's 2024 sustainability challenge ([source](https://walmart.converge.tech/content/converge/en_in/sparkathon/building-a-sustainable-future.html)), most recycling initiatives lack transparency, traceability, and effective incentives for both consumers and stakeholders. There is a pressing need for a tech-driven, transparent, and engaging solution that not only eliminates single-use plastics but also motivates users and partners to participate in a circular economy.
 
-ReLoop addresses this challenge by providing a robust backend system for a reusable bag return ecosystem. The platform leverages unique QR-coded bags, digital transaction tracking, and an incentive-based model to encourage sustainable behavior. By enabling real-time lifecycle monitoring, role-based access for users and workers, and seamless partner/vendor integration, ReLoop ensures that every bag's journey—from issuance to reuse or recycling—is transparent, auditable, and rewarding. This approach empowers retailers, staff, and customers to collaboratively reduce plastic waste and build a more sustainable future.
+ReLoop addresses this challenge by providing a robust backend system for a reusable bag return ecosystem. The platform leverages unique QR-coded bags, digital transaction tracking, and an incentive-based model to encourage sustainable behavior. By enabling real-time lifecycle monitoring, role-based access for users and workers, and seamless partner/vendor integration, ReLoop ensures that every bag's journey—from issuance to reuse or recycling—is transparent, auditable, and rewarding. This approach empowers retailers, staff, and customers to collaboratively reduce plastic waste and build a scalable, sustainable future.
 
 ## About the Project
 
@@ -23,6 +23,9 @@ ReLoop is a backend system designed to power a reusable bag return ecosystem, in
 - **Role-Based Access:** Separate dashboards and permissions for users and workers.
 - **Admin & Vendor Tools:** Enables third-party participation and digital approval/rejection of bag status.
 - **Secure & Scalable:** Built with FastAPI, JWT authentication, and PostgreSQL for robust, secure operations.
+
+**Making ReLoop Popular in India:**
+The ReLoop reward system is designed to penetrate the Indian market by offering instant, tangible incentives such as store credits, loyalty points, or discounts—rewards that resonate strongly with Indian consumers. By integrating with popular retail chains and local vendors, and supporting digital payment and wallet systems widely used in India, ReLoop encourages mass adoption. The gamified credit system, transparent tracking, and ease of use make sustainable behavior both rewarding and aspirational, helping to drive real change and make ReLoop a household name among Indian users.
 
 By combining sustainability, technology, and incentives, ReLoop aims to drive real behavior change and make circular economy models practical for retailers and customers alike.
 
