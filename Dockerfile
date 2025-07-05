@@ -21,4 +21,4 @@ COPY . .
 RUN uv sync --frozen && uv cache prune --ci
 
 # Run FastAPI with uv + shell expansion of $PORT
-CMD ["sh", "-c", "uv run uvicorn src.main:app --host 0.0.0.0 --port $PORT"]
+CMD ["sh", "-c", "uv run uvicorn main:app --host 0.0.0.0 --port $PORT"]
