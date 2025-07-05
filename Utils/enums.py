@@ -7,3 +7,11 @@ class LoggerType(str, Enum):
 class ResponseType(str, Enum):
     SUCCESS = "Successful"
     FAILURE = "Unsuccessful"
+
+class TransactionType(str, Enum):
+    SPEND = "Coin Spent"
+    EARN = "Coin Earned"
+
+class ScanMode(str, Enum):
+    CHECKOUT = "Checkout"
+    RECYCLE = "Recycle"

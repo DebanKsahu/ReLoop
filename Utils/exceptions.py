@@ -22,3 +22,15 @@ class HttpExceptions():
             detail=f"{item_name} already exists."
         )
     
+    @staticmethod
+    def invalid_item(item_name: str):
+        return HTTPException(status_code=400, detail=f"{item_name} is invalid")
+    
+    @staticmethod
+    def missing_token():
+        return HTTPException(status_code=401, detail="Missing token")
+    
+    @staticmethod
+    def invalid_token():
+        return HTTPException(status_code=401, detail="Invalid token")
+    

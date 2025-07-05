@@ -40,7 +40,7 @@ def user_login(login_data: UserLogin, session: Session = Depends(get_session)):
 
 @auth_router.post("/worker/signup", response_model=SimpleResponse)
 def worker_signup(signup_data: WorkerSignup, session: Session = Depends(get_session)):
-    worker_info = session.get(WorkerInDB,signup_data.email)
+    worker_info = session.exec(select(WorkerInDB).where(WorkerInDB.email==signup_data.email)).first()
     if worker_info is not None:
         raise HttpExceptions.item_already_exist(item_name="Worker Email")
     new_worker_info = WorkerInDB(

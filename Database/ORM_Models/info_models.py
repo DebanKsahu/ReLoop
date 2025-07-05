@@ -1,5 +1,7 @@
-from sqlmodel import SQLModel, Field
-from sqlalchemy import Column, BigInteger, PrimaryKeyConstraint
+from typing import List
+from sqlmodel import Relationship, SQLModel, Field
+from sqlalchemy import Column, BigInteger
+from Database.ORM_Models.transaction_models import BagScanTransaction, CoinTransaction, UserPurchaseTransaction
 
 class UserInDB(SQLModel, table=True):
     id: int | None = Field(default=None, sa_column=Column(BigInteger, primary_key=True, index=True))
@@ -9,6 +11,18 @@ class UserInDB(SQLModel, table=True):
 
     total_beg_returned: int = Field(default=0, sa_column=Column(BigInteger))
     total_beg_collected: int = Field(default=0, sa_column=Column(BigInteger))
+    coin_earned: int = Field(default=0, sa_column=Column(BigInteger))
+
+    all_purchase_transaction: List[UserPurchaseTransaction] = Relationship(back_populates="user_info")
+    all_bag_scans: List[BagScanTransaction] = Relationship(back_populates="user_info")
+    coin_transactions: List[CoinTransaction] = Relationship()
+
+class UserProfileExpose(SQLModel):
+    id: int
+    full_name: str
+    email: str
+    total_beg_returned: int
+    total_beg_collected: int
 
 class WorkerInDB(SQLModel, table=True):
     id: int | None = Field(default=None, sa_column=Column(BigInteger, primary_key=True, index=True))
@@ -18,3 +32,12 @@ class WorkerInDB(SQLModel, table=True):
 
     total_beg_scanned: int = Field(default=0, sa_column=Column(BigInteger))
     total_fault_scan: int = Field(default=0, sa_column=Column(BigInteger))
+
+    all_bag_scans: List[BagScanTransaction] = Relationship(back_populates="worker_info")
+
+class WorkerProfileExpose(SQLModel):
+    id: int 
+    full_name: str 
+    email: str 
+    total_beg_scanned: int 
+    total_fault_scan: int 

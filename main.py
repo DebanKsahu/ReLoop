@@ -3,6 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from sqlmodel import SQLModel
 from Database.Engine import engine
 from Auth.auth import auth_router
+from Dashboard.dashboard import dashboard_router
 from contextlib import asynccontextmanager
 
 @asynccontextmanager
@@ -20,6 +21,7 @@ app.add_middleware(
     allow_headers = ["*"]
 )
 app.include_router(auth_router)
+app.include_router(dashboard_router)
 
 @app.get("/")
 def home():
