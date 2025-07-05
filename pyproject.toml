@@ -18,5 +18,5 @@ dependencies = [
     "python-multipart>=0.0.20",
     "pyzbar>=0.1.9",
     "sqlmodel>=0.0.24",
-    "uvicorn>=0.34.3",
+    "uvicorn[standard]>=0.34.3",
 ]
