@@ -11,15 +11,14 @@ RUN apt-get update && apt-get install -y \
 # Set working directory
 WORKDIR /app
 
-# Install uv package manager
+# Install uv
 RUN pip install uv==0.7.12
 
-# Copy all project files
+# Copy all files
 COPY . .
 
-# Sync dependencies into isolated .venv
+# Install dependencies into .venv
 RUN uv sync --frozen && uv cache prune --ci
 
-
-# Use uv to run uvicorn from the environment
-CMD ["uv", "run", "uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "$PORT"]
+# Run FastAPI with uv + shell expansion of $PORT
+CMD ["sh", "-c", "uv run uvicorn src.main:app --host 0.0.0.0 --port $PORT"]
