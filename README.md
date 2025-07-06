@@ -29,6 +29,21 @@ The ReLoop reward system is designed to penetrate the Indian market by offering 
 
 By combining sustainability, technology, and incentives, ReLoop aims to drive real behavior change and make circular economy models practical for retailers and customers alike.
 
+## System Architecture
+
+Below are the key architecture diagrams illustrating the ReLoop platform:
+
+### 1. High-Level Overview Of User Dashboard
+![High-Level System Overview](System%20Architecture/User_Dashboard_Detail-1.png)
+
+### 2. High-Level Overview Of Worker Dashboard
+![Bag Lifecycle & Tracking Flow](System%20Architecture/Worker_Dashboard_Detail-1.png)
+
+### 3. Bag Lifecycle & Tracking Flow
+![Incentive & Credit Engine Flow](System%20Architecture/Some%20working%20features%20of%20ReLoop%20(Initially%20Planned).png)
+
+> _Diagrams created with Excalidraw.
+
 ## Demo Video
 
 Watch a quick demo of ReLoop in action:  
