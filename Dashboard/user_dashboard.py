@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException
-from Database.ORM_Models.info_models import UserInDB, UserProfileExpose
+from Database.ORM_Models.info_models import CoinInfo, UserInDB, UserProfileExpose
 from Database.ORM_Models.response_models import SimpleResponse
-from Database.ORM_Models.transaction_models import CoinTransaction, CoinTransactionExpose1, CoinTransactionExpose2, CoinTransactionShow, UserPurchaseTransaction
+from Database.ORM_Models.transaction_models import CoinTransaction, CoinTransactionExpose1, CoinTransactionExpose2, CoinTransactionShow
 from Utils.dependency import oauth2_scheme, get_session
 from Utils.enums import ResponseType, TransactionType
 from Utils.router_classes import UserRouterClass
@@ -35,13 +35,18 @@ def coin_transactions(token: str = Depends(oauth2_scheme), session: Session = De
                 type1_transactions.append(CoinTransactionExpose1(**transaction.model_dump()))
         return CoinTransactionShow(type1=type1_transactions,type2=type2_transactions)
     
-@user_dashboard_router.get("/total_coin")
+@user_dashboard_router.get("/coin_info")
 def get_total_coin(token: str = Depends(oauth2_scheme), session: Session = Depends(get_session)):
     payload = JwtUtils.decode_jwt(token)
     user_id = payload.get("id")
     user_info = session.get(UserInDB,user_id)
     if user_info is not None:
-        return user_info.coin_earned
+        coin_info = CoinInfo(
+            current_coin_balance=user_info.current_coin_balance,
+            total_coin_earned=user_info.total_coin_earned,
+            total_coin_spend=user_info.total_coin_spend
+        )
+        return coin_info
     
 @user_dashboard_router.get("/profile", response_model=UserProfileExpose)
 def get_user_profile(token: str = Depends(oauth2_scheme), session: Session = Depends(get_session)):
@@ -57,7 +62,7 @@ def redeem_coin(coin_amount: int, token: str = Depends(oauth2_scheme), session: 
     user_id = payload.get("id",-1)
     user_info = session.get(UserInDB,user_id)
     if user_info is not None:
-        if coin_amount>user_info.coin_earned:
+        if coin_amount>user_info.current_coin_balance:
             raise HTTPException(status_code=400, detail="Not enough coins to complete the transaction.")
         elif coin_amount<=0:
             raise HTTPException(status_code=400, detail="Please enter a valid amount to complete the transaction.")
@@ -68,7 +73,8 @@ def redeem_coin(coin_amount: int, token: str = Depends(oauth2_scheme), session: 
                 amount=coin_amount,
                 transaction_type=TransactionType.SPEND
             )
-            user_info.coin_earned = user_info.coin_earned-coin_amount
+            user_info.current_coin_balance = user_info.current_coin_balance-coin_amount
+            user_info.total_coin_spend += coin_amount
             session.add(new_transaction)
             session.add(user_info)
             session.commit()

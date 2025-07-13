@@ -11,7 +11,9 @@ class UserInDB(SQLModel, table=True):
 
     total_beg_returned: int = Field(default=0, sa_column=Column(BigInteger))
     total_beg_collected: int = Field(default=0, sa_column=Column(BigInteger))
-    coin_earned: int = Field(default=0, sa_column=Column(BigInteger))
+    current_coin_balance: int = Field(default=0, sa_column=Column(BigInteger))
+    total_coin_earned: int = Field(default=0, sa_column=Column(BigInteger))
+    total_coin_spend: int = Field(default=0,sa_column=Column(BigInteger))
 
     all_purchase_transaction: List[UserPurchaseTransaction] = Relationship(back_populates="user_info")
     all_bag_scans: List[BagScanTransaction] = Relationship(back_populates="user_info")
@@ -23,6 +25,11 @@ class UserProfileExpose(SQLModel):
     email: str
     total_beg_returned: int
     total_beg_collected: int
+
+class CoinInfo(SQLModel):
+    current_coin_balance: int
+    total_coin_earned: int 
+    total_coin_spend: int 
 
 class WorkerInDB(SQLModel, table=True):
     id: int | None = Field(default=None, sa_column=Column(BigInteger, primary_key=True, index=True))

@@ -12,7 +12,7 @@ class UserPurchaseTransaction(SQLModel, table=True):
     bag_used: int = Field(default=0)
     transaction_date: date = Field(default_factory=lambda : datetime.now(timezone.utc).date())
 
-    user_info: "UserInDB" = Relationship(back_populates="all_purchase_transaction") # type: ignore
+    user_info: "UserInDB" = Relationship(back_populates="all_purchase_transaction") # type: ignore  # noqa: F821
 
 class CoinTransaction(SQLModel, table=True):
     id: int | None = Field(default=None, sa_column=Column(BigInteger, primary_key=True)) 
@@ -55,8 +55,8 @@ class BagScanTransaction(SQLModel, table=True):
     scan_date: date = Field(default_factory=lambda : datetime.now(timezone.utc).date())
     scan_mode: ScanMode
 
-    user_info: "UserInDB" = Relationship(back_populates="all_bag_scans") # type: ignore
-    worker_info: "WorkerInDB" = Relationship(back_populates="all_bag_scans") # type: ignore
+    user_info: "UserInDB" = Relationship(back_populates="all_bag_scans") # type: ignore  # noqa: F821
+    worker_info: "WorkerInDB" = Relationship(back_populates="all_bag_scans") # type: ignore  # noqa: F821
 
 class BagScanTransactionExpose(SQLModel):
     id: int

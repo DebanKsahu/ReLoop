@@ -1,8 +1,8 @@
 from datetime import datetime, timezone
 from typing import List
-from fastapi import APIRouter, Depends, Form, HTTPException, UploadFile
+from fastapi import APIRouter, Depends, Form, UploadFile
 from Database.ORM_Models.bag_models import BagInDB
-from Database.ORM_Models.info_models import UserInDB, UserProfileExpose, WorkerInDB, WorkerProfileExpose
+from Database.ORM_Models.info_models import UserInDB, WorkerInDB, WorkerProfileExpose
 from Database.ORM_Models.response_models import SimpleResponse
 from Database.ORM_Models.transaction_models import BagScanTransaction, BagScanTransactionExpose, CoinTransaction, UserPurchaseTransaction
 from Utils.dependency import oauth2_scheme, get_session
@@ -96,7 +96,8 @@ async def scan_qr(uploaded_qr: UploadFile, scan_mode: ScanMode = Form(), user_id
                 transaction_type=TransactionType.EARN
             )
             user_info.total_beg_returned = user_info.total_beg_returned+1
-            user_info.coin_earned = user_info.coin_earned+30-old_bag.number_of_time_used
+            user_info.current_coin_balance = user_info.current_coin_balance+30-old_bag.number_of_time_used
+            user_info.total_coin_earned = user_info.total_coin_earned+30-old_bag.number_of_time_used
             worker_info.total_beg_scanned = worker_info.total_beg_scanned+1
             session.add(old_bag)
             session.add(new_coin_transaction)
