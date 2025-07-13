@@ -33,7 +33,7 @@ def coin_transactions(token: str = Depends(oauth2_scheme), session: Session = De
                 type2_transactions.append(CoinTransactionExpose2(**transaction.model_dump()))
             else:
                 type1_transactions.append(CoinTransactionExpose1(**transaction.model_dump()))
-        return CoinTransactionShow(type1=type1_transactions,type2=type2_transactions)
+        return CoinTransactionShow(spending_transactions=type1_transactions,earning_transactions=type2_transactions)
     
 @user_dashboard_router.get("/coin_info")
 def get_total_coin(token: str = Depends(oauth2_scheme), session: Session = Depends(get_session)):

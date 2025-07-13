@@ -44,8 +44,8 @@ class CoinTransactionExpose2(SQLModel):
     amount: int 
 
 class CoinTransactionShow(SQLModel):
-    type1: List[CoinTransactionExpose1]
-    type2: List[CoinTransactionExpose2]
+    spending_transactions: List[CoinTransactionExpose1]
+    earning_transactions: List[CoinTransactionExpose2]
     
 class BagScanTransaction(SQLModel, table=True):
     id: int | None = Field(default=None, sa_column=Column(BigInteger, primary_key=True))
